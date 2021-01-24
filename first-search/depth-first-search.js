@@ -1,4 +1,4 @@
-const data = require('./constants');
+const nodeList = require('./constants');
 
 function dfs1(node, path = []) {
 	path.push(node.name);
@@ -11,7 +11,7 @@ function dfs1(node, path = []) {
 
 	return path;
 }
-console.log(dfs1(data));
+console.log(dfs1(nodeList));
 
 
 
@@ -25,13 +25,27 @@ let dfs2 = (node, nodeList = []) => {
 	}
 	return nodeList
 }
-console.log(dfs2(data));
+console.log(dfs2(nodeList));
 
 
 
-let dfs3 = () => {
+let dfs3 = (node) => {
 	const stack = [];
 	const path = [];
 
-	stack.push()
+	stack.push(node);
+	
+	while(stack.length) {
+		const cNode = stack.pop();
+		path.push(cNode.name);
+		
+		const children = cNode.children || [];
+		
+		for (var i = children.length - 1; i >=0; i--) {
+			stack.push(children[i]);
+		}
+	}
+	
+	return path;
 }
+console.log(dfs3(nodeList));
